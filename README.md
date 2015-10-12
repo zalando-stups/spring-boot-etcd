@@ -1,9 +1,8 @@
-# Spring Boot Etcd Service
+# spring-boot-etcd
 
 ## Purpose
 
 This project provides a small etcd client to access and store configuration values in an etcd cluster.
-
 
 ## Download
 
