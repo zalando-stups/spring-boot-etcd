@@ -1,0 +1,15 @@
+{
+    "action": "delete",
+    "node": {
+        "createdIndex": 3,
+        "key": "/sample",
+        "modifiedIndex": 4
+    },
+     "prevNode": {
+        "key": "/sample",
+        "value": "Hello world",
+        "modifiedIndex": 3,
+        "createdIndex": 3
+    }
+    
+}

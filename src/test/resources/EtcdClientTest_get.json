@@ -1,0 +1,9 @@
+{
+    "action": "get",
+    "node": {
+        "createdIndex": 2,
+        "key": "/sample",
+        "modifiedIndex": 2,
+        "value": "Hello world"
+    }
+}
