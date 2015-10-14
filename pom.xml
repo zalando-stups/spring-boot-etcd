@@ -160,6 +160,18 @@
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5.2</version>
+				<configuration>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+					<useReleaseProfile>false</useReleaseProfile>
+					<releaseProfiles>release</releaseProfiles>
+					<goals>deploy</goals>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-gpg-plugin</artifactId>
 				<version>1.6</version>
 				<executions>
@@ -175,6 +187,12 @@
 
 		</plugins>
 	</build>
+
+	<scm>
+		<connection>scm:git:https://github.com/danielrohe/spring-boot-etcd.git</connection>
+		<developerConnection>scm:git:https://github.com/danielrohe/spring-boot-etcd.git</developerConnection>
+		<url>https://github.com/danielrohe/spring-boot-etcd</url>
+	</scm>
 
 	<distributionManagement>
 		<snapshotRepository>
