@@ -22,31 +22,32 @@ import lombok.NoArgsConstructor;
 /**
  * The etcd member response object from members API.
  * 
- * @see https://coreos.com/etcd/docs/2.1.0/other_apis.html
+ * @see <a href="https://coreos.com/etcd/docs/2.1.0/other_apis.html">https://
+ *      coreos.com/etcd/docs/2.1.0/other_apis.html</a>
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class EtcdMember {
 
-    /**
-     * identifier
-     */
-    private String id;
+	/**
+	 * identifier
+	 */
+	private String id;
 
-    /**
-     * name
-     */
-    private String name;
+	/**
+	 * name
+	 */
+	private String name;
 
-    /**
-     * peer URLs
-     */
-    private String[] peerURLs;
+	/**
+	 * peer URLs
+	 */
+	private String[] peerURLs;
 
-    /**
-     * client URLs
-     */
-    private String[] clientURLs;
+	/**
+	 * client URLs
+	 */
+	private String[] clientURLs;
 
 }

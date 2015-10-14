@@ -22,16 +22,17 @@ import lombok.NoArgsConstructor;
 /**
  * The etcd list members response object from members API.
  * 
- * @see https://coreos.com/etcd/docs/2.1.0/other_apis.html
+ * @see <a href="https://coreos.com/etcd/docs/2.1.0/other_apis.html">https://
+ *      coreos.com/etcd/docs/2.1.0/other_apis.html</a>
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class EtcdMemberResponse {
 
-    /**
-     * members
-     */
-    private EtcdMember[] members;
+	/**
+	 * members
+	 */
+	private EtcdMember[] members;
 
 }

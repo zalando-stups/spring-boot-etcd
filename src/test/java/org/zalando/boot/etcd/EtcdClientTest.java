@@ -53,12 +53,9 @@ public class EtcdClientTest {
 
 	@Test
 	public void get() throws EtcdException {
-		server.expect(
-				MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample"))
-				.andExpect(MockRestRequestMatchers.method(HttpMethod.GET))
-				.andRespond(MockRestResponseCreators.withSuccess(
-						new ClassPathResource("EtcdClientTest_get.json"),
-						MediaType.APPLICATION_JSON));
+		server.expect(MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample"))
+				.andExpect(MockRestRequestMatchers.method(HttpMethod.GET)).andRespond(MockRestResponseCreators
+						.withSuccess(new ClassPathResource("EtcdClientTest_get.json"), MediaType.APPLICATION_JSON));
 
 		EtcdResponse response = client.get("sample");
 		Assert.assertNotNull("response", response);
@@ -68,8 +65,7 @@ public class EtcdClientTest {
 
 	@Test(expected = EtcdException.class)
 	public void getWithResourceAccessException() throws EtcdException {
-		server.expect(
-				MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample"))
+		server.expect(MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample"))
 				.andExpect(MockRestRequestMatchers.method(HttpMethod.GET))
 				.andRespond(MockRestResponseCreators.withStatus(HttpStatus.NOT_FOUND)
 						.contentType(MediaType.APPLICATION_JSON)
@@ -77,20 +73,16 @@ public class EtcdClientTest {
 
 		try {
 			client.get("sample");
-		}
-		finally {
+		} finally {
 			server.verify();
 		}
 	}
 
 	@Test
 	public void getRecursive() throws EtcdException {
-		server.expect(MockRestRequestMatchers
-				.requestTo("http://localhost:2379/v2/keys/sample?recursive=true"))
-				.andExpect(MockRestRequestMatchers.method(HttpMethod.GET))
-				.andRespond(MockRestResponseCreators.withSuccess(
-						new ClassPathResource("EtcdClientTest_get.json"),
-						MediaType.APPLICATION_JSON));
+		server.expect(MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample?recursive=true"))
+				.andExpect(MockRestRequestMatchers.method(HttpMethod.GET)).andRespond(MockRestResponseCreators
+						.withSuccess(new ClassPathResource("EtcdClientTest_get.json"), MediaType.APPLICATION_JSON));
 
 		EtcdResponse response = client.get("sample", true);
 		Assert.assertNotNull("response", response);
@@ -100,14 +92,11 @@ public class EtcdClientTest {
 
 	@Test
 	public void put() throws EtcdException {
-		server.expect(
-				MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample"))
+		server.expect(MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample"))
 				.andExpect(MockRestRequestMatchers.method(HttpMethod.PUT))
-				.andExpect(MockRestRequestMatchers.content()
-						.contentType(MediaType.APPLICATION_FORM_URLENCODED))
+				.andExpect(MockRestRequestMatchers.content().contentType(MediaType.APPLICATION_FORM_URLENCODED))
 				.andExpect(MockRestRequestMatchers.content().string("value=Hello+world"))
-				.andRespond(MockRestResponseCreators.withSuccess(
-						new ClassPathResource("EtcdClientTest_set.json"),
+				.andRespond(MockRestResponseCreators.withSuccess(new ClassPathResource("EtcdClientTest_set.json"),
 						MediaType.APPLICATION_JSON));
 
 		EtcdResponse response = client.put("sample", "Hello world");
@@ -118,14 +107,11 @@ public class EtcdClientTest {
 
 	@Test
 	public void putWithSetTtl() throws EtcdException {
-		server.expect(MockRestRequestMatchers
-				.requestTo("http://localhost:2379/v2/keys/sample?ttl=60"))
+		server.expect(MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample?ttl=60"))
 				.andExpect(MockRestRequestMatchers.method(HttpMethod.PUT))
-				.andExpect(MockRestRequestMatchers.content()
-						.contentType(MediaType.APPLICATION_FORM_URLENCODED))
+				.andExpect(MockRestRequestMatchers.content().contentType(MediaType.APPLICATION_FORM_URLENCODED))
 				.andExpect(MockRestRequestMatchers.content().string("value=Hello+world"))
-				.andRespond(MockRestResponseCreators.withSuccess(
-						new ClassPathResource("EtcdClientTest_set.json"),
+				.andRespond(MockRestResponseCreators.withSuccess(new ClassPathResource("EtcdClientTest_set.json"),
 						MediaType.APPLICATION_JSON));
 
 		EtcdResponse response = client.put("sample", "Hello world", 60);
@@ -136,14 +122,11 @@ public class EtcdClientTest {
 
 	@Test
 	public void putWithUnsetTtl() throws EtcdException {
-		server.expect(MockRestRequestMatchers
-				.requestTo("http://localhost:2379/v2/keys/sample?ttl="))
+		server.expect(MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample?ttl="))
 				.andExpect(MockRestRequestMatchers.method(HttpMethod.PUT))
-				.andExpect(MockRestRequestMatchers.content()
-						.contentType(MediaType.APPLICATION_FORM_URLENCODED))
+				.andExpect(MockRestRequestMatchers.content().contentType(MediaType.APPLICATION_FORM_URLENCODED))
 				.andExpect(MockRestRequestMatchers.content().string("value=Hello+world"))
-				.andRespond(MockRestResponseCreators.withSuccess(
-						new ClassPathResource("EtcdClientTest_set.json"),
+				.andRespond(MockRestResponseCreators.withSuccess(new ClassPathResource("EtcdClientTest_set.json"),
 						MediaType.APPLICATION_JSON));
 
 		EtcdResponse response = client.put("sample", "Hello world", -1);
@@ -154,12 +137,9 @@ public class EtcdClientTest {
 
 	@Test
 	public void delete() throws EtcdException {
-		server.expect(
-				MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample"))
-				.andExpect(MockRestRequestMatchers.method(HttpMethod.DELETE))
-				.andRespond(MockRestResponseCreators.withSuccess(
-						new ClassPathResource("EtcdClientTest_delete.json"),
-						MediaType.APPLICATION_JSON));
+		server.expect(MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample"))
+				.andExpect(MockRestRequestMatchers.method(HttpMethod.DELETE)).andRespond(MockRestResponseCreators
+						.withSuccess(new ClassPathResource("EtcdClientTest_delete.json"), MediaType.APPLICATION_JSON));
 
 		EtcdResponse response = client.delete("sample");
 		Assert.assertNotNull("response", response);
@@ -169,14 +149,11 @@ public class EtcdClientTest {
 
 	@Test
 	public void create() throws EtcdException {
-		server.expect(
-				MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample"))
+		server.expect(MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample"))
 				.andExpect(MockRestRequestMatchers.method(HttpMethod.POST))
-				.andExpect(MockRestRequestMatchers.content()
-						.contentType(MediaType.APPLICATION_FORM_URLENCODED))
+				.andExpect(MockRestRequestMatchers.content().contentType(MediaType.APPLICATION_FORM_URLENCODED))
 				.andExpect(MockRestRequestMatchers.content().string("value=Hello+world"))
-				.andRespond(MockRestResponseCreators.withSuccess(
-						new ClassPathResource("EtcdClientTest_delete.json"),
+				.andRespond(MockRestResponseCreators.withSuccess(new ClassPathResource("EtcdClientTest_delete.json"),
 						MediaType.APPLICATION_JSON));
 
 		EtcdResponse response = client.create("sample", "Hello world");
@@ -187,14 +164,11 @@ public class EtcdClientTest {
 
 	@Test
 	public void compareAndSwapWithPrevExist() throws EtcdException {
-		server.expect(MockRestRequestMatchers
-				.requestTo("http://localhost:2379/v2/keys/sample?prevExist=false"))
+		server.expect(MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample?prevExist=false"))
 				.andExpect(MockRestRequestMatchers.method(HttpMethod.PUT))
-				.andExpect(MockRestRequestMatchers.content()
-						.contentType(MediaType.APPLICATION_FORM_URLENCODED))
+				.andExpect(MockRestRequestMatchers.content().contentType(MediaType.APPLICATION_FORM_URLENCODED))
 				.andExpect(MockRestRequestMatchers.content().string("value=Hello+world"))
-				.andRespond(MockRestResponseCreators.withSuccess(
-						new ClassPathResource("EtcdClientTest_delete.json"),
+				.andRespond(MockRestResponseCreators.withSuccess(new ClassPathResource("EtcdClientTest_delete.json"),
 						MediaType.APPLICATION_JSON));
 
 		EtcdResponse response = client.compareAndSwap("sample", "Hello world", false);
@@ -205,14 +179,11 @@ public class EtcdClientTest {
 
 	@Test
 	public void compareAndSwapWithPrevExistAndSetTtl() throws EtcdException {
-		server.expect(MockRestRequestMatchers
-				.requestTo("http://localhost:2379/v2/keys/sample?ttl=60&prevExist=false"))
+		server.expect(MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample?ttl=60&prevExist=false"))
 				.andExpect(MockRestRequestMatchers.method(HttpMethod.PUT))
-				.andExpect(MockRestRequestMatchers.content()
-						.contentType(MediaType.APPLICATION_FORM_URLENCODED))
+				.andExpect(MockRestRequestMatchers.content().contentType(MediaType.APPLICATION_FORM_URLENCODED))
 				.andExpect(MockRestRequestMatchers.content().string("value=Hello+world"))
-				.andRespond(MockRestResponseCreators.withSuccess(
-						new ClassPathResource("EtcdClientTest_delete.json"),
+				.andRespond(MockRestResponseCreators.withSuccess(new ClassPathResource("EtcdClientTest_delete.json"),
 						MediaType.APPLICATION_JSON));
 
 		EtcdResponse response = client.compareAndSwap("sample", "Hello world", 60, false);
@@ -223,14 +194,11 @@ public class EtcdClientTest {
 
 	@Test
 	public void compareAndSwapWithPrevExistAndUnsetTtl() throws EtcdException {
-		server.expect(MockRestRequestMatchers
-				.requestTo("http://localhost:2379/v2/keys/sample?ttl=&prevExist=false"))
+		server.expect(MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample?ttl=&prevExist=false"))
 				.andExpect(MockRestRequestMatchers.method(HttpMethod.PUT))
-				.andExpect(MockRestRequestMatchers.content()
-						.contentType(MediaType.APPLICATION_FORM_URLENCODED))
+				.andExpect(MockRestRequestMatchers.content().contentType(MediaType.APPLICATION_FORM_URLENCODED))
 				.andExpect(MockRestRequestMatchers.content().string("value=Hello+world"))
-				.andRespond(MockRestResponseCreators.withSuccess(
-						new ClassPathResource("EtcdClientTest_delete.json"),
+				.andRespond(MockRestResponseCreators.withSuccess(new ClassPathResource("EtcdClientTest_delete.json"),
 						MediaType.APPLICATION_JSON));
 
 		EtcdResponse response = client.compareAndSwap("sample", "Hello world", -1, false);
@@ -241,14 +209,11 @@ public class EtcdClientTest {
 
 	@Test
 	public void compareAndSwapWithPrevIndex() throws EtcdException {
-		server.expect(MockRestRequestMatchers
-				.requestTo("http://localhost:2379/v2/keys/sample?prevIndex=2"))
+		server.expect(MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample?prevIndex=2"))
 				.andExpect(MockRestRequestMatchers.method(HttpMethod.PUT))
-				.andExpect(MockRestRequestMatchers.content()
-						.contentType(MediaType.APPLICATION_FORM_URLENCODED))
+				.andExpect(MockRestRequestMatchers.content().contentType(MediaType.APPLICATION_FORM_URLENCODED))
 				.andExpect(MockRestRequestMatchers.content().string("value=Hello+world"))
-				.andRespond(MockRestResponseCreators.withSuccess(
-						new ClassPathResource("EtcdClientTest_delete.json"),
+				.andRespond(MockRestResponseCreators.withSuccess(new ClassPathResource("EtcdClientTest_delete.json"),
 						MediaType.APPLICATION_JSON));
 
 		EtcdResponse response = client.compareAndSwap("sample", "Hello world", 2);
@@ -259,14 +224,11 @@ public class EtcdClientTest {
 
 	@Test
 	public void compareAndSwapWithPrevIndexAndSetTtl() throws EtcdException {
-		server.expect(MockRestRequestMatchers
-				.requestTo("http://localhost:2379/v2/keys/sample?ttl=60&prevIndex=2"))
+		server.expect(MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample?ttl=60&prevIndex=2"))
 				.andExpect(MockRestRequestMatchers.method(HttpMethod.PUT))
-				.andExpect(MockRestRequestMatchers.content()
-						.contentType(MediaType.APPLICATION_FORM_URLENCODED))
+				.andExpect(MockRestRequestMatchers.content().contentType(MediaType.APPLICATION_FORM_URLENCODED))
 				.andExpect(MockRestRequestMatchers.content().string("value=Hello+world"))
-				.andRespond(MockRestResponseCreators.withSuccess(
-						new ClassPathResource("EtcdClientTest_delete.json"),
+				.andRespond(MockRestResponseCreators.withSuccess(new ClassPathResource("EtcdClientTest_delete.json"),
 						MediaType.APPLICATION_JSON));
 
 		EtcdResponse response = client.compareAndSwap("sample", "Hello world", 60, 2);
@@ -277,14 +239,11 @@ public class EtcdClientTest {
 
 	@Test
 	public void compareAndSwapWithPrevIndexAndUnsetTtl() throws EtcdException {
-		server.expect(MockRestRequestMatchers
-				.requestTo("http://localhost:2379/v2/keys/sample?ttl=&prevIndex=2"))
+		server.expect(MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample?ttl=&prevIndex=2"))
 				.andExpect(MockRestRequestMatchers.method(HttpMethod.PUT))
-				.andExpect(MockRestRequestMatchers.content()
-						.contentType(MediaType.APPLICATION_FORM_URLENCODED))
+				.andExpect(MockRestRequestMatchers.content().contentType(MediaType.APPLICATION_FORM_URLENCODED))
 				.andExpect(MockRestRequestMatchers.content().string("value=Hello+world"))
-				.andRespond(MockRestResponseCreators.withSuccess(
-						new ClassPathResource("EtcdClientTest_delete.json"),
+				.andRespond(MockRestResponseCreators.withSuccess(new ClassPathResource("EtcdClientTest_delete.json"),
 						MediaType.APPLICATION_JSON));
 
 		EtcdResponse response = client.compareAndSwap("sample", "Hello world", -1, 2);
@@ -295,18 +254,14 @@ public class EtcdClientTest {
 
 	@Test
 	public void compareAndSwapWithPrevValue() throws EtcdException {
-		server.expect(MockRestRequestMatchers
-				.requestTo("http://localhost:2379/v2/keys/sample?prevValue=Hello%20etcd"))
+		server.expect(MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample?prevValue=Hello%20etcd"))
 				.andExpect(MockRestRequestMatchers.method(HttpMethod.PUT))
-				.andExpect(MockRestRequestMatchers.content()
-						.contentType(MediaType.APPLICATION_FORM_URLENCODED))
+				.andExpect(MockRestRequestMatchers.content().contentType(MediaType.APPLICATION_FORM_URLENCODED))
 				.andExpect(MockRestRequestMatchers.content().string("value=Hello+world"))
-				.andRespond(MockRestResponseCreators.withSuccess(
-						new ClassPathResource("EtcdClientTest_delete.json"),
+				.andRespond(MockRestResponseCreators.withSuccess(new ClassPathResource("EtcdClientTest_delete.json"),
 						MediaType.APPLICATION_JSON));
 
-		EtcdResponse response = client.compareAndSwap("sample", "Hello world",
-				"Hello etcd");
+		EtcdResponse response = client.compareAndSwap("sample", "Hello world", "Hello etcd");
 		Assert.assertNotNull("response", response);
 
 		server.verify();
@@ -314,18 +269,15 @@ public class EtcdClientTest {
 
 	@Test
 	public void compareAndSwapWithPrevValueAndSetTtl() throws EtcdException {
-		server.expect(MockRestRequestMatchers.requestTo(
-				"http://localhost:2379/v2/keys/sample?ttl=60&prevValue=Hello%20etcd"))
+		server.expect(
+				MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample?ttl=60&prevValue=Hello%20etcd"))
 				.andExpect(MockRestRequestMatchers.method(HttpMethod.PUT))
-				.andExpect(MockRestRequestMatchers.content()
-						.contentType(MediaType.APPLICATION_FORM_URLENCODED))
+				.andExpect(MockRestRequestMatchers.content().contentType(MediaType.APPLICATION_FORM_URLENCODED))
 				.andExpect(MockRestRequestMatchers.content().string("value=Hello+world"))
-				.andRespond(MockRestResponseCreators.withSuccess(
-						new ClassPathResource("EtcdClientTest_delete.json"),
+				.andRespond(MockRestResponseCreators.withSuccess(new ClassPathResource("EtcdClientTest_delete.json"),
 						MediaType.APPLICATION_JSON));
 
-		EtcdResponse response = client.compareAndSwap("sample", "Hello world", 60,
-				"Hello etcd");
+		EtcdResponse response = client.compareAndSwap("sample", "Hello world", 60, "Hello etcd");
 		Assert.assertNotNull("response", response);
 
 		server.verify();
@@ -333,18 +285,15 @@ public class EtcdClientTest {
 
 	@Test
 	public void compareAndSwapWithPrevValueAndUnsetTtl() throws EtcdException {
-		server.expect(MockRestRequestMatchers.requestTo(
-				"http://localhost:2379/v2/keys/sample?ttl=&prevValue=Hello%20etcd"))
+		server.expect(
+				MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample?ttl=&prevValue=Hello%20etcd"))
 				.andExpect(MockRestRequestMatchers.method(HttpMethod.PUT))
-				.andExpect(MockRestRequestMatchers.content()
-						.contentType(MediaType.APPLICATION_FORM_URLENCODED))
+				.andExpect(MockRestRequestMatchers.content().contentType(MediaType.APPLICATION_FORM_URLENCODED))
 				.andExpect(MockRestRequestMatchers.content().string("value=Hello+world"))
-				.andRespond(MockRestResponseCreators.withSuccess(
-						new ClassPathResource("EtcdClientTest_delete.json"),
+				.andRespond(MockRestResponseCreators.withSuccess(new ClassPathResource("EtcdClientTest_delete.json"),
 						MediaType.APPLICATION_JSON));
 
-		EtcdResponse response = client.compareAndSwap("sample", "Hello world", -1,
-				"Hello etcd");
+		EtcdResponse response = client.compareAndSwap("sample", "Hello world", -1, "Hello etcd");
 		Assert.assertNotNull("response", response);
 
 		server.verify();
@@ -352,12 +301,9 @@ public class EtcdClientTest {
 
 	@Test
 	public void compareAndDeleteWithPrevIndex() throws EtcdException {
-		server.expect(MockRestRequestMatchers
-				.requestTo("http://localhost:2379/v2/keys/sample?prevIndex=3"))
-				.andExpect(MockRestRequestMatchers.method(HttpMethod.DELETE))
-				.andRespond(MockRestResponseCreators.withSuccess(
-						new ClassPathResource("EtcdClientTest_delete.json"),
-						MediaType.APPLICATION_JSON));
+		server.expect(MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample?prevIndex=3"))
+				.andExpect(MockRestRequestMatchers.method(HttpMethod.DELETE)).andRespond(MockRestResponseCreators
+						.withSuccess(new ClassPathResource("EtcdClientTest_delete.json"), MediaType.APPLICATION_JSON));
 
 		EtcdResponse response = client.compareAndDelete("sample", 3);
 		Assert.assertNotNull("response", response);
@@ -367,12 +313,9 @@ public class EtcdClientTest {
 
 	@Test
 	public void compareAndDeleteWithPrevValue() throws EtcdException {
-		server.expect(MockRestRequestMatchers
-				.requestTo("http://localhost:2379/v2/keys/sample?prevValue=Hello%20etcd"))
-				.andExpect(MockRestRequestMatchers.method(HttpMethod.DELETE))
-				.andRespond(MockRestResponseCreators.withSuccess(
-						new ClassPathResource("EtcdClientTest_delete.json"),
-						MediaType.APPLICATION_JSON));
+		server.expect(MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample?prevValue=Hello%20etcd"))
+				.andExpect(MockRestRequestMatchers.method(HttpMethod.DELETE)).andRespond(MockRestResponseCreators
+						.withSuccess(new ClassPathResource("EtcdClientTest_delete.json"), MediaType.APPLICATION_JSON));
 
 		EtcdResponse response = client.compareAndDelete("sample", "Hello etcd");
 		Assert.assertNotNull("response", response);
@@ -382,15 +325,11 @@ public class EtcdClientTest {
 
 	@Test
 	public void putDir() throws EtcdException {
-		server.expect(
-				MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample"))
+		server.expect(MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample"))
 				.andExpect(MockRestRequestMatchers.method(HttpMethod.PUT))
-				.andExpect(MockRestRequestMatchers.content()
-						.contentType(MediaType.APPLICATION_FORM_URLENCODED))
-				.andExpect(MockRestRequestMatchers.content().string("dir=true"))
-				.andRespond(MockRestResponseCreators.withSuccess(
-						new ClassPathResource("EtcdClientTest_delete.json"),
-						MediaType.APPLICATION_JSON));
+				.andExpect(MockRestRequestMatchers.content().contentType(MediaType.APPLICATION_FORM_URLENCODED))
+				.andExpect(MockRestRequestMatchers.content().string("dir=true")).andRespond(MockRestResponseCreators
+						.withSuccess(new ClassPathResource("EtcdClientTest_delete.json"), MediaType.APPLICATION_JSON));
 
 		EtcdResponse response = client.putDir("sample");
 		Assert.assertNotNull("response", response);
@@ -400,14 +339,11 @@ public class EtcdClientTest {
 
 	@Test
 	public void putDirWithSetTtl() throws EtcdException {
-		server.expect(
-				MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample"))
+		server.expect(MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample"))
 				.andExpect(MockRestRequestMatchers.method(HttpMethod.PUT))
-				.andExpect(MockRestRequestMatchers.content()
-						.contentType(MediaType.APPLICATION_FORM_URLENCODED))
+				.andExpect(MockRestRequestMatchers.content().contentType(MediaType.APPLICATION_FORM_URLENCODED))
 				.andExpect(MockRestRequestMatchers.content().string("dir=true&ttl=60"))
-				.andRespond(MockRestResponseCreators.withSuccess(
-						new ClassPathResource("EtcdClientTest_delete.json"),
+				.andRespond(MockRestResponseCreators.withSuccess(new ClassPathResource("EtcdClientTest_delete.json"),
 						MediaType.APPLICATION_JSON));
 
 		EtcdResponse response = client.putDir("sample", 60);
@@ -418,12 +354,9 @@ public class EtcdClientTest {
 
 	@Test
 	public void deleteDir() throws EtcdException {
-		server.expect(MockRestRequestMatchers
-				.requestTo("http://localhost:2379/v2/keys/sample?dir=true"))
-				.andExpect(MockRestRequestMatchers.method(HttpMethod.DELETE))
-				.andRespond(MockRestResponseCreators.withSuccess(
-						new ClassPathResource("EtcdClientTest_delete.json"),
-						MediaType.APPLICATION_JSON));
+		server.expect(MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample?dir=true"))
+				.andExpect(MockRestRequestMatchers.method(HttpMethod.DELETE)).andRespond(MockRestResponseCreators
+						.withSuccess(new ClassPathResource("EtcdClientTest_delete.json"), MediaType.APPLICATION_JSON));
 
 		EtcdResponse response = client.deleteDir("sample");
 		Assert.assertNotNull("response", response);
@@ -433,12 +366,9 @@ public class EtcdClientTest {
 
 	@Test
 	public void deleteDirWithRecursive() throws EtcdException {
-		server.expect(MockRestRequestMatchers
-				.requestTo("http://localhost:2379/v2/keys/sample?recursive=true"))
-				.andExpect(MockRestRequestMatchers.method(HttpMethod.DELETE))
-				.andRespond(MockRestResponseCreators.withSuccess(
-						new ClassPathResource("EtcdClientTest_delete.json"),
-						MediaType.APPLICATION_JSON));
+		server.expect(MockRestRequestMatchers.requestTo("http://localhost:2379/v2/keys/sample?recursive=true"))
+				.andExpect(MockRestRequestMatchers.method(HttpMethod.DELETE)).andRespond(MockRestResponseCreators
+						.withSuccess(new ClassPathResource("EtcdClientTest_delete.json"), MediaType.APPLICATION_JSON));
 
 		EtcdResponse response = client.deleteDir("sample", true);
 		Assert.assertNotNull("response", response);
@@ -448,12 +378,9 @@ public class EtcdClientTest {
 
 	@Test
 	public void listMembers() throws EtcdException {
-		server.expect(
-				MockRestRequestMatchers.requestTo("http://localhost:2379/v2/members"))
-				.andExpect(MockRestRequestMatchers.method(HttpMethod.GET))
-				.andRespond(MockRestResponseCreators.withSuccess(
-						new ClassPathResource("EtcdClientTest_delete.json"),
-						MediaType.APPLICATION_JSON));
+		server.expect(MockRestRequestMatchers.requestTo("http://localhost:2379/v2/members"))
+				.andExpect(MockRestRequestMatchers.method(HttpMethod.GET)).andRespond(MockRestResponseCreators
+						.withSuccess(new ClassPathResource("EtcdClientTest_delete.json"), MediaType.APPLICATION_JSON));
 
 		EtcdMemberResponse response = client.listMembers();
 		Assert.assertNotNull("response", response);

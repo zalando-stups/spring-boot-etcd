@@ -25,51 +25,52 @@ import lombok.NoArgsConstructor;
 /**
  * The etcd node object for keyspace operations as described in the client API.
  * 
- * @see https://coreos.com/etcd/docs/2.1.0/api.html
+ * @see <a href="https://coreos.com/etcd/docs/2.1.0/api.html">https://coreos.com
+ *      /etcd/docs/2.1.0/api.html</a>
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class EtcdNode {
 
-    /**
-     * key.
-     */
-    private String key;
+	/**
+	 * key.
+	 */
+	private String key;
 
-    /**
-     * value.
-     */
-    private String value;
+	/**
+	 * value.
+	 */
+	private String value;
 
-    /**
-     * time to live.
-     */
-    private Long ttl;
+	/**
+	 * time to live.
+	 */
+	private Long ttl;
 
-    /**
-     * indicates whether the node is a directory node.
-     */
-    private boolean dir = false;
+	/**
+	 * indicates whether the node is a directory node.
+	 */
+	private boolean dir = false;
 
-    /**
-     * created index.
-     */
-    private int createdIndex;
+	/**
+	 * created index.
+	 */
+	private int createdIndex;
 
-    /**
-     * modified index.
-     */
-    private int modifiedIndex;
+	/**
+	 * modified index.
+	 */
+	private int modifiedIndex;
 
-    /**
-     * expiration.
-     */
-    private Date expiration;
+	/**
+	 * expiration.
+	 */
+	private Date expiration;
 
-    /**
-     * child nodes.
-     */
-    private List<EtcdNode> nodes;
+	/**
+	 * child nodes.
+	 */
+	private List<EtcdNode> nodes;
 
 }

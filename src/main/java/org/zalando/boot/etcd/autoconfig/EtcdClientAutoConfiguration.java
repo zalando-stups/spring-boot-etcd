@@ -39,8 +39,8 @@ import org.zalando.boot.etcd.EtcdClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * The auto configuration of the etcd client usign either an initial list of locations or
- * a service name for DNS discovery.
+ * The auto configuration of the etcd client usign either an initial list of
+ * locations or a service name for DNS discovery.
  */
 @Configuration
 @EnableConfigurationProperties(EtcdClientProperties.class)
@@ -92,13 +92,10 @@ public class EtcdClientAutoConfiguration {
 			env.put("java.naming.provider.url", "dns:");
 
 			DirContext context = new InitialDirContext(env);
-			Attributes attributes = context.getAttributes(serviceName,
-					new String[] { "SRV" });
-			for (NamingEnumeration<? extends Attribute> records = attributes
-					.getAll(); records.hasMore();) {
+			Attributes attributes = context.getAttributes(serviceName, new String[] { "SRV" });
+			for (NamingEnumeration<? extends Attribute> records = attributes.getAll(); records.hasMore();) {
 				Attribute record = records.next();
-				NamingEnumeration<String> values = (NamingEnumeration<String>) record
-						.getAll();
+				NamingEnumeration<String> values = (NamingEnumeration<String>) record.getAll();
 				while (values.hasMore()) {
 					String dns = values.next();
 					String[] split = dns.split(" ");

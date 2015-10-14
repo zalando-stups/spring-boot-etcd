@@ -22,30 +22,31 @@ import lombok.NoArgsConstructor;
 /**
  * The etcd error object for keyspace operations as described in the client API.
  * 
- * @see https://coreos.com/etcd/docs/2.1.0/api.html
+ * @see <a href="https://coreos.com/etcd/docs/2.1.0/api.html">https://coreos.com
+ *      /etcd/docs/2.1.0/api.html</a>
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class EtcdError {
 
-    /**
-     * error code
-     */
-    private int errorCode;
-    
-    /**
-     * message
-     */
-    private String message;
-    
-    /**
-     * cause
-     */
-    private String cause;
-    
-    /**
-     * index
-     */
-    private int index;
+	/**
+	 * error code
+	 */
+	private int errorCode;
+
+	/**
+	 * message
+	 */
+	private String message;
+
+	/**
+	 * cause
+	 */
+	private String cause;
+
+	/**
+	 * index
+	 */
+	private int index;
 }

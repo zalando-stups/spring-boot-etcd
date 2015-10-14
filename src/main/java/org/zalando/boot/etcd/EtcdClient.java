@@ -49,7 +49,8 @@ import lombok.extern.apachecommons.CommonsLog;
 /**
  * A service that encapsulates the communication with an etcd cluster.
  * 
- * @see https://coreos.com/etcd/docs/2.1.0/api.html
+ * @see <a href="https://coreos.com/etcd/docs/2.1.0/api.html">https://coreos.com
+ *      /etcd/docs/2.1.0/api.html</a>
  */
 @CommonsLog
 public class EtcdClient implements InitializingBean, DisposableBean {
@@ -118,16 +119,15 @@ public class EtcdClient implements InitializingBean, DisposableBean {
 	/**
 	 * location updater
 	 */
-	private ScheduledExecutorService locationUpdater = Executors.newScheduledThreadPool(1,
-			new ThreadFactory() {
+	private ScheduledExecutorService locationUpdater = Executors.newScheduledThreadPool(1, new ThreadFactory() {
 
-				@Override
-				public Thread newThread(Runnable r) {
-					Thread t = new Thread(r, "etcd-location-updater");
-					t.setDaemon(true);
-					return t;
-				}
-			});
+		@Override
+		public Thread newThread(Runnable r) {
+			Thread t = new Thread(r, "etcd-location-updater");
+			t.setDaemon(true);
+			return t;
+		}
+	});
 
 	/**
 	 * Creates a new EtcdClient.
@@ -139,7 +139,8 @@ public class EtcdClient implements InitializingBean, DisposableBean {
 	/**
 	 * Creates a new EtcdClient with the given location.
 	 * 
-	 * @param location the location
+	 * @param location
+	 *            the location
 	 */
 	public EtcdClient(String location) {
 		this.locations = new String[] { location };
@@ -148,14 +149,16 @@ public class EtcdClient implements InitializingBean, DisposableBean {
 	/**
 	 * Creates a new EtcdClient with the given locations.
 	 * 
-	 * @param locations the locations
+	 * @param locations
+	 *            the locations
 	 */
 	public EtcdClient(String[] locations) {
 		this.locations = locations;
 	}
 
 	/**
-	 * @param value the locations
+	 * @param value
+	 *            the locations
 	 */
 	public void setLocations(String[] value) {
 		this.locations = value == null ? new String[0] : value;
@@ -178,9 +181,11 @@ public class EtcdClient implements InitializingBean, DisposableBean {
 	/**
 	 * Returns the node with the given key from etcd.
 	 * 
-	 * @param key the node's key
+	 * @param key
+	 *            the node's key
 	 * @return the response from etcd with the node
-	 * @throws EtcdException in case etcd returned an error
+	 * @throws EtcdException
+	 *             in case etcd returned an error
 	 */
 	public EtcdResponse get(String key) throws EtcdException {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(KEYSPACE);
@@ -192,11 +197,14 @@ public class EtcdClient implements InitializingBean, DisposableBean {
 	/**
 	 * Returns the node with the given key from etcd.
 	 * 
-	 * @param key the node's key
-	 * @param recursive <code>true</code> if child nodes should be returned,
-	 * <code>false</code> otherwise
+	 * @param key
+	 *            the node's key
+	 * @param recursive
+	 *            <code>true</code> if child nodes should be returned,
+	 *            <code>false</code> otherwise
 	 * @return the response from etcd with the node
-	 * @throws EtcdException in case etcd returned an error
+	 * @throws EtcdException
+	 *             in case etcd returned an error
 	 */
 	public EtcdResponse get(String key, boolean recursive) throws EtcdException {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(KEYSPACE);
@@ -207,13 +215,16 @@ public class EtcdClient implements InitializingBean, DisposableBean {
 	}
 
 	/**
-	 * Sets the value of the node with the given key in etcd. Any previously existing
-	 * key-value pair is returned as prevNode in the etcd response.
+	 * Sets the value of the node with the given key in etcd. Any previously
+	 * existing key-value pair is returned as prevNode in the etcd response.
 	 * 
-	 * @param key the node's key
-	 * @param value the node's value
+	 * @param key
+	 *            the node's key
+	 * @param value
+	 *            the node's value
 	 * @return the response from etcd with the node
-	 * @throws EtcdException in case etcd returned an error
+	 * @throws EtcdException
+	 *             in case etcd returned an error
 	 */
 	public EtcdResponse put(final String key, final String value) throws EtcdException {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(KEYSPACE);
@@ -228,11 +239,16 @@ public class EtcdClient implements InitializingBean, DisposableBean {
 	/**
 	 * Sets the value of the node with the given key in etcd.
 	 * 
-	 * @param key the node's key
-	 * @param value the node's value
-	 * @param ttl the node's time-to-live or <code>-1</code> to unset existing ttl
+	 * @param key
+	 *            the node's key
+	 * @param value
+	 *            the node's value
+	 * @param ttl
+	 *            the node's time-to-live or <code>-1</code> to unset existing
+	 *            ttl
 	 * @return the response from etcd with the node
-	 * @throws EtcdException in case etcd returned an error
+	 * @throws EtcdException
+	 *             in case etcd returned an error
 	 */
 	public EtcdResponse put(String key, String value, int ttl) throws EtcdException {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(KEYSPACE);
@@ -248,9 +264,11 @@ public class EtcdClient implements InitializingBean, DisposableBean {
 	/**
 	 * Deletes the node with the given key from etcd.
 	 * 
-	 * @param key the node's key
+	 * @param key
+	 *            the node's key
 	 * @return the response from etcd with the node
-	 * @throws EtcdException in case etcd returned an error
+	 * @throws EtcdException
+	 *             in case etcd returned an error
 	 */
 	public EtcdResponse delete(final String key) throws EtcdException {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(KEYSPACE);
@@ -260,15 +278,18 @@ public class EtcdClient implements InitializingBean, DisposableBean {
 	}
 
 	/**
-	 * Creates a new node with the given key-value pair under the node with the given key.
+	 * Creates a new node with the given key-value pair under the node with the
+	 * given key.
 	 * 
-	 * @param key the directory node's key
-	 * @param value the value of the created node
+	 * @param key
+	 *            the directory node's key
+	 * @param value
+	 *            the value of the created node
 	 * @return the response from etcd with the node
-	 * @throws EtcdException in case etcd returned an error
+	 * @throws EtcdException
+	 *             in case etcd returned an error
 	 */
-	public EtcdResponse create(final String key, final String value)
-			throws EtcdException {
+	public EtcdResponse create(final String key, final String value) throws EtcdException {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(KEYSPACE);
 		builder.pathSegment(key);
 
@@ -281,15 +302,18 @@ public class EtcdClient implements InitializingBean, DisposableBean {
 	/**
 	 * Atomically creates or updates a key-value pair in etcd.
 	 * 
-	 * @param key the key
-	 * @param value the value
-	 * @param prevExist <code>true</code> if the existing node should be updated,
-	 * <code>false</code> of the node should be created
+	 * @param key
+	 *            the key
+	 * @param value
+	 *            the value
+	 * @param prevExist
+	 *            <code>true</code> if the existing node should be updated,
+	 *            <code>false</code> of the node should be created
 	 * @return the response from etcd with the node
-	 * @throws EtcdException in case etcd returned an error
+	 * @throws EtcdException
+	 *             in case etcd returned an error
 	 */
-	public EtcdResponse compareAndSwap(final String key, final String value,
-			boolean prevExist) throws EtcdException {
+	public EtcdResponse compareAndSwap(final String key, final String value, boolean prevExist) throws EtcdException {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(KEYSPACE);
 		builder.pathSegment(key);
 		builder.queryParam("prevExist", prevExist);
@@ -303,16 +327,21 @@ public class EtcdClient implements InitializingBean, DisposableBean {
 	/**
 	 * Atomically creates or updates a key-value pair in etcd.
 	 * 
-	 * @param key the key
-	 * @param value the value
-	 * @param ttl the time-to-live
-	 * @param prevExist <code>true</code> if the existing node should be updated,
-	 * <code>false</code> of the node should be created
+	 * @param key
+	 *            the key
+	 * @param value
+	 *            the value
+	 * @param ttl
+	 *            the time-to-live
+	 * @param prevExist
+	 *            <code>true</code> if the existing node should be updated,
+	 *            <code>false</code> of the node should be created
 	 * @return the response from etcd with the node
-	 * @throws EtcdException in case etcd returned an error
+	 * @throws EtcdException
+	 *             in case etcd returned an error
 	 */
-	public EtcdResponse compareAndSwap(final String key, final String value, int ttl,
-			boolean prevExist) throws EtcdException {
+	public EtcdResponse compareAndSwap(final String key, final String value, int ttl, boolean prevExist)
+			throws EtcdException {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(KEYSPACE);
 		builder.pathSegment(key);
 		builder.queryParam("ttl", ttl == -1 ? "" : ttl);
@@ -327,14 +356,17 @@ public class EtcdClient implements InitializingBean, DisposableBean {
 	/**
 	 * Atomically updates a key-value pair in etcd.
 	 * 
-	 * @param key the key
-	 * @param value the value
-	 * @param prevIndex the modified index of the key
+	 * @param key
+	 *            the key
+	 * @param value
+	 *            the value
+	 * @param prevIndex
+	 *            the modified index of the key
 	 * @return the response from etcd with the node
-	 * @throws EtcdException in case etcd returned an error
+	 * @throws EtcdException
+	 *             in case etcd returned an error
 	 */
-	public EtcdResponse compareAndSwap(String key, String value, int prevIndex)
-			throws EtcdException {
+	public EtcdResponse compareAndSwap(String key, String value, int prevIndex) throws EtcdException {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(KEYSPACE);
 		builder.pathSegment(key);
 		builder.queryParam("prevIndex", prevIndex);
@@ -348,15 +380,19 @@ public class EtcdClient implements InitializingBean, DisposableBean {
 	/**
 	 * Atomically updates a key-value pair in etcd.
 	 * 
-	 * @param key the key
-	 * @param value the value
-	 * @param ttl the time-to-live
-	 * @param prevIndex the modified index of the key
+	 * @param key
+	 *            the key
+	 * @param value
+	 *            the value
+	 * @param ttl
+	 *            the time-to-live
+	 * @param prevIndex
+	 *            the modified index of the key
 	 * @return the response from etcd with the node
-	 * @throws EtcdException in case etcd returned an error
+	 * @throws EtcdException
+	 *             in case etcd returned an error
 	 */
-	public EtcdResponse compareAndSwap(String key, String value, int ttl, int prevIndex)
-			throws EtcdException {
+	public EtcdResponse compareAndSwap(String key, String value, int ttl, int prevIndex) throws EtcdException {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(KEYSPACE);
 		builder.pathSegment(key);
 		builder.queryParam("ttl", ttl == -1 ? "" : ttl);
@@ -371,14 +407,17 @@ public class EtcdClient implements InitializingBean, DisposableBean {
 	/**
 	 * Atomically updates a key-value pair in etcd.
 	 * 
-	 * @param key the key
-	 * @param value the value
-	 * @param prevValue the previous value of the key
+	 * @param key
+	 *            the key
+	 * @param value
+	 *            the value
+	 * @param prevValue
+	 *            the previous value of the key
 	 * @return the response from etcd with the node
-	 * @throws EtcdException in case etcd returned an error
+	 * @throws EtcdException
+	 *             in case etcd returned an error
 	 */
-	public EtcdResponse compareAndSwap(String key, String value, String prevValue)
-			throws EtcdException {
+	public EtcdResponse compareAndSwap(String key, String value, String prevValue) throws EtcdException {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(KEYSPACE);
 		builder.pathSegment(key);
 		builder.queryParam("prevValue", prevValue);
@@ -392,15 +431,19 @@ public class EtcdClient implements InitializingBean, DisposableBean {
 	/**
 	 * Atomically updates a key-value pair in etcd.
 	 * 
-	 * @param key the key
-	 * @param value the value
-	 * @param ttl the time-to-live
-	 * @param prevValue the previous value of the key
+	 * @param key
+	 *            the key
+	 * @param value
+	 *            the value
+	 * @param ttl
+	 *            the time-to-live
+	 * @param prevValue
+	 *            the previous value of the key
 	 * @return the response from etcd with the node
-	 * @throws EtcdException in case etcd returned an error
+	 * @throws EtcdException
+	 *             in case etcd returned an error
 	 */
-	public EtcdResponse compareAndSwap(String key, String value, int ttl,
-			String prevValue) throws EtcdException {
+	public EtcdResponse compareAndSwap(String key, String value, int ttl, String prevValue) throws EtcdException {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(KEYSPACE);
 		builder.pathSegment(key);
 		builder.queryParam("ttl", ttl == -1 ? "" : ttl);
@@ -415,14 +458,15 @@ public class EtcdClient implements InitializingBean, DisposableBean {
 	/**
 	 * Atomically deletes a key-value pair in etcd.
 	 * 
-	 * @param key the key
-	 * @param value the value
-	 * @param prevIndex the modified index of the key
+	 * @param key
+	 *            the key
+	 * @param prevIndex
+	 *            the modified index of the key
 	 * @return the response from etcd with the node
-	 * @throws EtcdException in case etcd returned an error
+	 * @throws EtcdException
+	 *             in case etcd returned an error
 	 */
-	public EtcdResponse compareAndDelete(final String key, int prevIndex)
-			throws EtcdException {
+	public EtcdResponse compareAndDelete(final String key, int prevIndex) throws EtcdException {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(KEYSPACE);
 		builder.pathSegment(key);
 		builder.queryParam("prevIndex", prevIndex);
@@ -433,14 +477,15 @@ public class EtcdClient implements InitializingBean, DisposableBean {
 	/**
 	 * Atomically deletes a key-value pair in etcd.
 	 * 
-	 * @param key the key
-	 * @param value the value
-	 * @param prevValue the previous value of the key
+	 * @param key
+	 *            the key
+	 * @param prevValue
+	 *            the previous value of the key
 	 * @return the response from etcd with the node
-	 * @throws EtcdException in case etcd returned an error
+	 * @throws EtcdException
+	 *             in case etcd returned an error
 	 */
-	public EtcdResponse compareAndDelete(final String key, String prevValue)
-			throws EtcdException {
+	public EtcdResponse compareAndDelete(final String key, String prevValue) throws EtcdException {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(KEYSPACE);
 		builder.pathSegment(key);
 		builder.queryParam("prevValue", prevValue);
@@ -451,9 +496,11 @@ public class EtcdClient implements InitializingBean, DisposableBean {
 	/**
 	 * Creates a directory node in etcd.
 	 * 
-	 * @param key the key
+	 * @param key
+	 *            the key
 	 * @return the response from etcd with the node
-	 * @throws EtcdException in case etcd returned an error
+	 * @throws EtcdException
+	 *             in case etcd returned an error
 	 */
 	public EtcdResponse putDir(final String key) throws EtcdException {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(KEYSPACE);
@@ -468,10 +515,13 @@ public class EtcdClient implements InitializingBean, DisposableBean {
 	/**
 	 * Creates a directory node in etcd.
 	 * 
-	 * @param key the key
-	 * @param ttl the time-to-live
+	 * @param key
+	 *            the key
+	 * @param ttl
+	 *            the time-to-live
 	 * @return the response from etcd with the node
-	 * @throws EtcdException in case etcd returned an error
+	 * @throws EtcdException
+	 *             in case etcd returned an error
 	 */
 	public EtcdResponse putDir(String key, int ttl) throws EtcdException {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(KEYSPACE);
@@ -504,7 +554,8 @@ public class EtcdClient implements InitializingBean, DisposableBean {
 	 * Returns a representation of all members in the etcd cluster.
 	 * 
 	 * @return the members
-	 * @throws EtcdException in case etcd returned an error
+	 * @throws EtcdException
+	 *             in case etcd returned an error
 	 */
 	public EtcdMemberResponse listMembers() throws EtcdException {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(MEMBERSPACE);
@@ -513,6 +564,7 @@ public class EtcdClient implements InitializingBean, DisposableBean {
 
 	/**
 	 * {@inheritDoc}
+	 * 
 	 * @see InitializingBean#afterPropertiesSet()
 	 */
 	@Override
@@ -538,6 +590,7 @@ public class EtcdClient implements InitializingBean, DisposableBean {
 
 	/**
 	 * {@inheritDoc}
+	 * 
 	 * @see DisposableBean#destroy()
 	 */
 	@Override
@@ -560,15 +613,12 @@ public class EtcdClient implements InitializingBean, DisposableBean {
 				if (clientUrls != null) {
 					for (String clientUrl : clientUrls) {
 						try {
-							String version = template.getForObject(clientUrl + "/version",
-									String.class);
+							String version = template.getForObject(clientUrl + "/version", String.class);
 							if (version == null) {
 								locations.add(clientUrl);
 							}
-						}
-						catch (RestClientException e) {
-							log.debug("ignoring URI " + clientUrl + " because of error.",
-									e);
+						} catch (RestClientException e) {
+							log.debug("ignoring URI " + clientUrl + " because of error.", e);
 						}
 					}
 				}
@@ -576,28 +626,30 @@ public class EtcdClient implements InitializingBean, DisposableBean {
 
 			if (!locations.isEmpty()) {
 				this.locations = locations.toArray(new String[locations.size()]);
-			}
-			else {
+			} else {
 				log.debug("not updating locations because no location is found");
 			}
-		}
-		catch (EtcdException e) {
+		} catch (EtcdException e) {
 			log.error("Could not update etcd cluster member.", e);
 		}
 	}
 
 	/**
-	 * Executes the given method on the given location using the given request data.
+	 * Executes the given method on the given location using the given request
+	 * data.
 	 * 
-	 * @param uri the location
-	 * @param method the HTTP method
-	 * @param requestData the request data
+	 * @param uri
+	 *            the location
+	 * @param method
+	 *            the HTTP method
+	 * @param requestData
+	 *            the request data
 	 * @return the etcd response
-	 * @throws EtcdException in case etcd returned an error
+	 * @throws EtcdException
+	 *             in case etcd returned an error
 	 */
 	private <T> T execute(UriComponentsBuilder uriTemplate, HttpMethod method,
-			MultiValueMap<String, String> requestData, Class<T> responseType)
-					throws EtcdException {
+			MultiValueMap<String, String> requestData, Class<T> responseType) throws EtcdException {
 		long startTimeMillis = System.currentTimeMillis();
 		int retry = -1;
 
@@ -607,45 +659,36 @@ public class EtcdClient implements InitializingBean, DisposableBean {
 
 			URI uri = uriTemplate.buildAndExpand(locations[locationIndex]).toUri();
 
-			RequestEntity<MultiValueMap<String, String>> requestEntity = new RequestEntity<>(
-					requestData, null, method, uri);
+			RequestEntity<MultiValueMap<String, String>> requestEntity = new RequestEntity<>(requestData, null, method,
+					uri);
 
 			try {
-				ResponseEntity<T> responseEntity = template.exchange(requestEntity,
-						responseType);
+				ResponseEntity<T> responseEntity = template.exchange(requestEntity, responseType);
 				return responseEntity.getBody();
-			}
-			catch (HttpStatusCodeException e) {
+			} catch (HttpStatusCodeException e) {
 				EtcdError error = null;
 				try {
-					error = responseConverter.getObjectMapper()
-							.readValue(e.getResponseBodyAsByteArray(), EtcdError.class);
-				}
-				catch (IOException ex) {
+					error = responseConverter.getObjectMapper().readValue(e.getResponseBodyAsByteArray(),
+							EtcdError.class);
+				} catch (IOException ex) {
 					error = null;
 				}
-				throw new EtcdException(error, "Failed to execute " + requestEntity + ".",
-						e);
-			}
-			catch (ResourceAccessException e) {
+				throw new EtcdException(error, "Failed to execute " + requestEntity + ".", e);
+			} catch (ResourceAccessException e) {
 				log.debug("Failed to execute " + requestEntity + ", retrying if possible.", e);
-				
+
 				if (locationIndex == locations.length - 1) {
 					locationIndex = 0;
-				}
-				else {
+				} else {
 					locationIndex++;
 				}
 				lastException = e;
 			}
-		}
-		while (retry <= retryCount
-				&& System.currentTimeMillis() - startTimeMillis < retryDuration);
+		} while (retry <= retryCount && System.currentTimeMillis() - startTimeMillis < retryDuration);
 
 		if (lastException != null) {
 			throw lastException;
-		}
-		else {
+		} else {
 			return null;
 		}
 	}

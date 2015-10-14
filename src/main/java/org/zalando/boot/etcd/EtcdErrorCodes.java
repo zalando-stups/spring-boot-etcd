@@ -18,49 +18,50 @@ package org.zalando.boot.etcd;
 /**
  * The etcd error codes as defined in the error codes documentation.
  *
- * @see  https://coreos.com/etcd/docs/2.1.0/errorcode.html
+ * @see <a href="https://coreos.com/etcd/docs/2.1.0/api.html">https://coreos.com
+ *      /etcd/docs/2.1.0/api.html</a>
  */
 public final class EtcdErrorCodes {
 
-    /**
-     * error code key not found.
-     */
-    public static final int ECODE_KEY_NOT_FOUND = 100;
+	/**
+	 * error code key not found.
+	 */
+	public static final int ECODE_KEY_NOT_FOUND = 100;
 
-    /**
-     * error code compare failed.
-     */
-    public static final int ECODE_TEST_FAILED = 101;
+	/**
+	 * error code compare failed.
+	 */
+	public static final int ECODE_TEST_FAILED = 101;
 
-    /**
-     * error code not a file.
-     */
-    public static final int ECODE_NOT_FILE = 102;
+	/**
+	 * error code not a file.
+	 */
+	public static final int ECODE_NOT_FILE = 102;
 
-    /**
-     * error code not a directory.
-     */
-    public static final int ECODE_NOT_DIR = 104;
+	/**
+	 * error code not a directory.
+	 */
+	public static final int ECODE_NOT_DIR = 104;
 
-    /**
-     * error code key already exists.
-     */
-    public static final int ECODE_NODE_EXIST = 105;
+	/**
+	 * error code key already exists.
+	 */
+	public static final int ECODE_NODE_EXIST = 105;
 
-    /**
-     * error code root is read only.
-     */
-    public static final int ECODE_ROOT_RONLY = 107;
+	/**
+	 * error code root is read only.
+	 */
+	public static final int ECODE_ROOT_RONLY = 107;
 
-    /**
-     * error code directory is not empty.
-     */
-    public static final int ECODE_DIR_NOT_EMPTY = 108;
+	/**
+	 * error code directory is not empty.
+	 */
+	public static final int ECODE_DIR_NOT_EMPTY = 108;
 
-    /**
-     * Creates a new EtcdErrorCodes. Hidden to prevent instantiation
-     */
-    private EtcdErrorCodes() {
-        super();
-    }
+	/**
+	 * Creates a new EtcdErrorCodes. Hidden to prevent instantiation
+	 */
+	private EtcdErrorCodes() {
+		super();
+	}
 }

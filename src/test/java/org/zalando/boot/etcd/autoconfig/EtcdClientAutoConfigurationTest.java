@@ -27,7 +27,6 @@ public class EtcdClientAutoConfigurationTest {
 		Assert.assertNotNull(client);
 		Assert.assertEquals("retry-count", 3, client.getRetryCount());
 		Assert.assertEquals("retry-duration", 30000, client.getRetryDuration());
-		Assert.assertArrayEquals("locations", new String[] { "http://localhost:2379" },
-				client.getLocations());
+		Assert.assertArrayEquals("locations", new String[] { "http://localhost:2379" }, client.getLocations());
 	}
 }

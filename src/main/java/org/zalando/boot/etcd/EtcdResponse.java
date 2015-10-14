@@ -20,28 +20,30 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * The etcd response object for keyspace operations as described in the client API.
+ * The etcd response object for keyspace operations as described in the client
+ * API.
  * 
- * @see https://coreos.com/etcd/docs/2.1.0/api.html
+ * @see <a href="https://coreos.com/etcd/docs/2.1.0/api.html">https://coreos.com
+ *      /etcd/docs/2.1.0/api.html</a>
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class EtcdResponse {
 
-    /**
-     * action.
-     */
-    private String action;
+	/**
+	 * action.
+	 */
+	private String action;
 
-    /**
-     * node.
-     */
-    private EtcdNode node;
+	/**
+	 * node.
+	 */
+	private EtcdNode node;
 
-    /**
-     * previous node.
-     */
-    private EtcdNode prevNode;
-    
+	/**
+	 * previous node.
+	 */
+	private EtcdNode prevNode;
+
 }
