@@ -182,9 +182,9 @@
 	</build>
 
 	<scm>
-		<connection>scm:git:https://github.com/danielrohe/spring-boot-etcd.git</connection>
-		<developerConnection>scm:git:https://github.com/danielrohe/spring-boot-etcd.git</developerConnection>
-		<url>https://github.com/danielrohe/spring-boot-etcd</url>
+		<connection>https://github.com/zalando/spring-boot-etcd.git</connection>
+		<developerConnection>https://github.com/zalando/spring-boot-etcd.git</developerConnection>
+		<url>https://github.com/zalando/spring-boot-etcd</url>
 	  <tag>HEAD</tag>
   </scm>
 
