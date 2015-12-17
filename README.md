@@ -11,12 +11,13 @@ Use the following maven dependency to add this library
     <dependency>
       <groupId>org.zalando</groupId>
       <artifactId>spring-boot-etcd</artifactId>
-      <version>1.0</version>
+      <version>1.3</version>
     </dependency>
 
 Then configure location or discovery domain in your application.properties
 
     zalando.etcd.location=http://etcd-cluster.example.org:2379
+    zalando.etcd.serviceName=etcd-cluster.example.com
 
 and use the etcd client in your service
 
@@ -27,13 +28,13 @@ and use the etcd client in your service
 
 Start an etcd cluster
 
-    docker run -d -p 127.0.0.1:2379:2379 -p 127.0.0.1:2380:2380 \
-      --name etcd-test quay.io/coreos/etcd:v2.0.8 -name etcd0 \
+    docker run -d -p 2379:2379 -p 2380:2380 \
+      --name etcd quay.io/coreos/etcd:v2.0.8 -name etcd0 \
       -advertise-client-urls http://10.170.0.10:2379,http://127.0.0.1:2379 \
       -listen-client-urls http://0.0.0.0:2379,http://127.0.0.1:2379 \
       -initial-advertise-peer-urls http://10.170.0.10:2380 \
       -listen-peer-urls http://0.0.0.0:2380 \
-      -initial-cluster-token etcd-cluster-1 \
+      -initial-cluster-token etcd-cluster \
       -initial-cluster etcd0=http://10.170.0.10:2380 \
       -initial-cluster-state new
 
@@ -41,11 +42,11 @@ Write a small spring boot application and add this project as dependency. Use an
 
 ## Build
 
-`mvn clean install`
+    mvn clean install
 
 ## Deployment
 
-`mvn release:prepare release:perform`
+    mvn release:prepare release:perform
 
 ## Contact
 
