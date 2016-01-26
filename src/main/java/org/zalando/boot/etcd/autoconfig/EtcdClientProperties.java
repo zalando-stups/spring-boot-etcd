@@ -25,6 +25,16 @@ import lombok.Data;
 @ConfigurationProperties(prefix = "zalando.etcd")
 @Data
 public class EtcdClientProperties {
+	
+	/**
+	 * DNS SRV name used to lookup etcd nodes
+	 */
+	private String serviceName;
+	
+	/**
+	 * location of etcd nodes
+	 */
+	private String[] location;
 
 	/**
 	 * indicates whether the etcd client is enabled
@@ -50,5 +60,10 @@ public class EtcdClientProperties {
 	 * maximum duration the client should retry before giving up
 	 */
 	private int retryDuration = 0;
+	
+	/**
+	 * indicates whether location information should be updated using the members API
+	 */
+	private boolean updateLocations = true;
 
 }

@@ -112,6 +112,11 @@ public class EtcdClient implements InitializingBean, DisposableBean {
 	private String[] locations;
 
 	/**
+	 * indicates whether the location updater is enabled
+	 */
+	private boolean locationUpdaterEnabled = true;
+
+	/**
 	 * current location
 	 */
 	private int locationIndex = 0;
@@ -156,6 +161,14 @@ public class EtcdClient implements InitializingBean, DisposableBean {
 		this.locations = locations;
 	}
 
+	public boolean isLocationUpdaterEnabled() {
+		return locationUpdaterEnabled;
+	}
+	
+	public void setLocationUpdaterEnabled(boolean value) {
+		this.locationUpdaterEnabled = value;
+	}
+	
 	/**
 	 * @param value
 	 *            the locations
@@ -579,13 +592,15 @@ public class EtcdClient implements InitializingBean, DisposableBean {
 		template = new RestTemplate(this.requestFactory);
 		template.setMessageConverters(Arrays.asList(requestConverter, responseConverter));
 
-		Runnable worker = new Runnable() {
-			@Override
-			public void run() {
-				updateMembers();
-			}
-		};
-		locationUpdater.scheduleAtFixedRate(worker, 5000, 5000, TimeUnit.MILLISECONDS);
+		if (locationUpdaterEnabled) {
+			Runnable worker = new Runnable() {
+				@Override
+				public void run() {
+					updateMembers();
+				}
+			};
+			locationUpdater.scheduleAtFixedRate(worker, 5000, 5000, TimeUnit.MILLISECONDS);
+		}
 	}
 
 	/**

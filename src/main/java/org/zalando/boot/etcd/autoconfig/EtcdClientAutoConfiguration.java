@@ -38,6 +38,8 @@ import org.zalando.boot.etcd.EtcdClient;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import scala.annotation.meta.setter;
+
 /**
  * The auto configuration of the etcd client usign either an initial list of
  * locations or a service name for DNS discovery.
@@ -55,15 +57,13 @@ public class EtcdClientAutoConfiguration {
 		@Autowired
 		private EtcdClientProperties properties = new EtcdClientProperties();
 
-		@Value("${zalando.etcd.location}")
-		private String location;
-
 		@Bean
 		public EtcdClient etcdService() {
-			EtcdClient client = new EtcdClient(location);
+			EtcdClient client = new EtcdClient(properties.getLocation());
 
 			client.setRetryCount(properties.getRetryCount());
 			client.setRetryDuration(properties.getRetryDuration());
+			client.setLocationUpdaterEnabled(properties.isUpdateLocations());
 
 			SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
 			requestFactory.setConnectTimeout(properties.getConnectTimeout());
@@ -80,9 +80,6 @@ public class EtcdClientAutoConfiguration {
 
 		@Autowired
 		private EtcdClientProperties properties = new EtcdClientProperties();
-
-		@Value("${zalando.etcd.serviceName}")
-		private String serviceName;
 
 		private List<String> discoverNodes(String serviceName) throws NamingException {
 			List<String> locations = new ArrayList<>();
@@ -113,12 +110,13 @@ public class EtcdClientAutoConfiguration {
 
 		@Bean
 		public EtcdClient etcdService() throws NamingException {
-			List<String> locations = discoverNodes("_etcd-server._tcp." + serviceName);
+			List<String> locations = discoverNodes("_etcd-server._tcp." + properties.getServiceName());
 
 			EtcdClient client = new EtcdClient(locations.get(0));
 
 			client.setRetryCount(properties.getRetryCount());
 			client.setRetryDuration(properties.getRetryDuration());
+			client.setLocationUpdaterEnabled(properties.isUpdateLocations());
 
 			SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
 			requestFactory.setConnectTimeout(properties.getConnectTimeout());
