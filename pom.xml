@@ -180,8 +180,8 @@
 	</build>
 
 	<scm>
-		<connection>https://github.com/zalando/spring-boot-etcd.git</connection>
-		<developerConnection>https://github.com/zalando/spring-boot-etcd.git</developerConnection>
+		<connection>scm:git:https://github.com/zalando/spring-boot-etcd.git</connection>
+		<developerConnection>scm:git:git@github.com:zalando/spring-boot-etcd.git</developerConnection>
 		<url>https://github.com/zalando/spring-boot-etcd</url>
 	  <tag>HEAD</tag>
   </scm>
