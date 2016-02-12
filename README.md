@@ -11,7 +11,7 @@ Use the following maven dependency to add this library
     <dependency>
       <groupId>org.zalando</groupId>
       <artifactId>spring-boot-etcd</artifactId>
-      <version>1.3</version>
+      <version>1.4</version>
     </dependency>
 
 Then configure location or discovery domain in your application.properties

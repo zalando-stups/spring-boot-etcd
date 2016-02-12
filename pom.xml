@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-dependencies</artifactId>
-		<version>1.2.5.RELEASE</version>
+		<version>1.3.2.RELEASE</version>
 		<relativePath />
 	</parent>
 
@@ -80,7 +80,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.14.8</version>
+			<version>1.16.6</version>
 			<!-- Lombok will not be used on the live system, it is only used when 
 				compiling, so we don't package it -->
 			<scope>provided</scope>
@@ -132,7 +132,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>2.4</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -146,7 +145,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.10.3</version>
 				<executions>
 					<execution>
 						<id>attach-javadocs</id>

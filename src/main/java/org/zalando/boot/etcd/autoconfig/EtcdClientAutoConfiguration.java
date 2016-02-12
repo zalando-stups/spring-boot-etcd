@@ -38,8 +38,6 @@ import org.zalando.boot.etcd.EtcdClient;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import scala.annotation.meta.setter;
-
 /**
  * The auto configuration of the etcd client usign either an initial list of
  * locations or a service name for DNS discovery.
