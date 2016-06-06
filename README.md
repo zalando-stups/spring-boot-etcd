@@ -2,11 +2,22 @@
 
 ## Purpose
 
-This project provides a small etcd client to access and store configuration values in an etcd cluster.
+Spring-boot-etcd is a [Spring Boot](http://projects.spring.io/spring-boot/) library that provides an [etcd](https://github.com/coreos/etcd) client to access and manage key-value pairs stored in an etcd cluster. It's useful out-of-the-box.
 
-## Download
+### Spring-boot-etcd Features
 
-Use the following maven dependency to add this library
+- provides an interface that includes all the functions featured by the etcd API v2
+- uses either a list of addresses or a DNS SRV record to help you discover the nodes of your etcd cluster
+- includes an automatic update mechanism so that the client can easily connect to nodes in the etcd cluster
+- provides auto-configuration so that you can get started without having to write any code
+
+Inspiration
+
+We created spring-boot-etcd after discovering that current implementations of the etcd client API don’t provide an automatic update mechanism, or use other libraries like [Netty](http://netty.io/) to communicate with the etcd cluster. Also, these implementations are not compatible the version of Netty used by the Cassandra driver.
+
+### Getting Started
+
+Use the following Maven dependency to add this library:
 
     <dependency>
       <groupId>org.zalando</groupId>
@@ -14,19 +25,27 @@ Use the following maven dependency to add this library
       <version>1.4</version>
     </dependency>
 
-Then configure location or discovery domain in your application.properties
+You can find the latest version at [Maven Central](http://search.maven.org/#search|ga|1|g%3A%22org.zalando%22%20a%3A%22spring-boot-etcd%22).
+
+###Configuration
+
+Configure one of these: 
+- the addresses of at least one etcd node, OR
+- the DNS SRV record name for auto-discovery
 
     zalando.etcd.location=http://etcd-cluster.example.org:2379
     zalando.etcd.serviceName=etcd-cluster.example.com
 
-and use the etcd client in your service
+### Running It
+
+Then, auto-wire the client into your code:
 
     @Autowired
     private EtcdClient etcdClient;
 
 ## Usage
 
-Start an etcd cluster
+Start an etcd cluster:
 
     docker run -d -p 2379:2379 -p 2380:2380 \
       --name etcd quay.io/coreos/etcd:v2.0.8 -name etcd0 \
@@ -38,9 +57,9 @@ Start an etcd cluster
       -initial-cluster etcd0=http://10.170.0.10:2380 \
       -initial-cluster-state new
 
-Write a small spring boot application and add this project as dependency. Use an autowired field of type EtcdService to inject the service into your bean. Call the methods to retrieve key-value pairs from etcd.
+Write a small Spring Boot application and add this project as a dependency. Use an autowired field of type EtcdService to inject the service into your bean. Call the methods to retrieve key-value pairs from etcd.
 
-## Build
+## Building
 
     mvn clean install
 
@@ -48,9 +67,9 @@ Write a small spring boot application and add this project as dependency. Use an
 
     mvn release:prepare release:perform
 
-## Contact
+## Contributing
 
-Please open an issue.
+This project accepts contributions from the open-source community, including bug fixes and feature adds. Before submitting a major change or PR, please open an issue describing the change or addition you would like to make.
 
 ## License
 
