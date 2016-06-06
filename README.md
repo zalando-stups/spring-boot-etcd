@@ -11,7 +11,7 @@ Spring-boot-etcd is a [Spring Boot](http://projects.spring.io/spring-boot/) libr
 - includes an automatic update mechanism so that the client can easily connect to nodes in the etcd cluster
 - provides auto-configuration so that you can get started without having to write any code
 
-Inspiration
+###Inspiration
 
 We created spring-boot-etcd after discovering that current implementations of the etcd client API don’t provide an automatic update mechanism, or use other libraries like [Netty](http://netty.io/) to communicate with the etcd cluster. Also, these implementations are not compatible the version of Netty used by the Cassandra driver.
 
@@ -32,6 +32,7 @@ You can find the latest version at [Maven Central](http://search.maven.org/#sear
 Configure one of these: 
 - the addresses of at least one etcd node, OR
 - the DNS SRV record name for auto-discovery
+
 
     zalando.etcd.location=http://etcd-cluster.example.org:2379
     zalando.etcd.serviceName=etcd-cluster.example.com
