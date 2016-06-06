@@ -30,9 +30,11 @@ You can find the latest version at [Maven Central](http://search.maven.org/#sear
 ###Configuration
 
 Configure one of these: 
+
 - the addresses of at least one etcd node, OR
 - the DNS SRV record name for auto-discovery
 
+Do: 
 
     zalando.etcd.location=http://etcd-cluster.example.org:2379
     zalando.etcd.serviceName=etcd-cluster.example.com
