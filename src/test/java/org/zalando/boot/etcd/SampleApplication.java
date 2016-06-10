@@ -1,6 +1,3 @@
-/*
- * 
- */
 package org.zalando.boot.etcd;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-dependencies</artifactId>
-		<version>1.3.2.RELEASE</version>
+		<version>1.4.0.M3</version>
 		<relativePath />
 	</parent>
 
@@ -57,6 +57,10 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 		</dependency>
@@ -80,7 +84,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.16.6</version>
+			<version>1.16.8</version>
 			<!-- Lombok will not be used on the live system, it is only used when 
 				compiling, so we don't package it -->
 			<scope>provided</scope>
@@ -111,7 +115,7 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.7.5.201505241946</version>
+				<version>0.7.7.201606060606</version>
 				<executions>
 					<!-- Prepares the property pointing to the JaCoCo runtime agent which 
 						is passed as VM argument when Maven the Surefire plugin is executed. -->
@@ -158,7 +162,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
-				<version>2.5.2</version>
+				<version>2.5.3</version>
 			</plugin>
 
 			<plugin>
