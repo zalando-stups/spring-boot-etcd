@@ -28,6 +28,18 @@
 			<organization>Zalando SE</organization>
 			<email>daniel.rohe@zalando.de</email>
 		</developer>
+		<developer>
+			<id>marcschumacher</id>
+			<name>Marc Schumacher</name>
+			<organization>Zalando SE</organization>
+			<email>marc.schumacher@zalando.de</email>
+		</developer>
+		<developer>
+			<id>gorzala</id>
+			<name>Marc Gorzala</name>
+			<organization>Zalando SE</organization>
+			<email>marc.gorzala@zalando.de</email>
+		</developer>
 	</developers>
 
 	<licenses>
