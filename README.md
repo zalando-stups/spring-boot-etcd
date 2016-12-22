@@ -21,11 +21,11 @@ Use the following Maven dependency to add this library:
 
     <dependency>
       <groupId>org.zalando</groupId>
-      <artifactId>zalando-boot-etcd</artifactId>
+      <artifactId>zalando-boot-etcd-starter</artifactId>
       <version>RELEASE</version>
     </dependency>
 
-You can find the latest version at [Maven Central](http://search.maven.org/#search|ga|1|g%3A%22org.zalando%22%20a%3A%22spring-boot-etcd%22).
+You can find the latest version at [Maven Central](http://search.maven.org/#search|ga|1|g%3A%22org.zalando%22%20a%3A%22zalando-boot-etcd-starter%22).
 
 ###Configuration
 
