@@ -1,103 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-dependencies</artifactId>
-		<version>1.4.0.M3</version>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.4.2.RELEASE</version>
 		<relativePath />
 	</parent>
 
 	<groupId>org.zalando</groupId>
-	<artifactId>spring-boot-etcd</artifactId>
-	<version>1.6-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<artifactId>zalando-boot-etcd-project</artifactId>
+	<version>2.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
 
-	<name>spring-boot-etcd</name>
+	<name>Zalando Boot Etcd :: Project</name>
 
-	<organization>
-		<name>Zalando SE</name>
-		<url>https://tech.zalando.com/</url>
-	</organization>
-
-	<developers>
-		<developer>
-			<id>drohe</id>
-			<name>Daniel Rohe</name>
-			<organization>Zalando SE</organization>
-			<email>daniel.rohe@zalando.de</email>
-		</developer>
-		<developer>
-			<id>marcschumacher</id>
-			<name>Marc Schumacher</name>
-			<organization>Zalando SE</organization>
-			<email>marc.schumacher@zalando.de</email>
-		</developer>
-		<developer>
-			<id>gorzala</id>
-			<name>Marc Gorzala</name>
-			<organization>Zalando SE</organization>
-			<email>marc.gorzala@zalando.de</email>
-		</developer>
-	</developers>
-
-	<licenses>
-		<license>
-			<name>Apache License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-			<distribution>repo</distribution>
-			<comments>A business-friendly OSS license</comments>
-		</license>
-	</licenses>
+	<modules>
+		<module>zalando-boot-etcd</module>
+		<module>zalando-boot-etcd-autoconfigure</module>
+		<module>zalando-boot-etcd-starter</module>
+	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.sourceEncoding>UTF-8</project.reporting.sourceEncoding>
+		<java.version>1.8</java.version>
 	</properties>
 
 	<dependencies>
 
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-autoconfigure</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-configuration-processor</artifactId>
-			<optional>true</optional>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.16.8</version>
 			<!-- Lombok will not be used on the live system, it is only used when 
 				compiling, so we don't package it -->
 			<scope>provided</scope>
@@ -107,15 +43,6 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -128,7 +55,7 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.7.7.201606060606</version>
+				<version>0.7.8</version>
 				<executions>
 					<!-- Prepares the property pointing to the JaCoCo runtime agent which 
 						is passed as VM argument when Maven the Surefire plugin is executed. -->
@@ -200,8 +127,8 @@
 		<connection>scm:git:https://github.com/zalando/spring-boot-etcd.git</connection>
 		<developerConnection>scm:git:git@github.com:zalando/spring-boot-etcd.git</developerConnection>
 		<url>https://github.com/zalando/spring-boot-etcd</url>
-	  <tag>HEAD</tag>
-  </scm>
+		<tag>HEAD</tag>
+	</scm>
 
 	<distributionManagement>
 		<snapshotRepository>
@@ -213,5 +140,39 @@
 			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
 	</distributionManagement>
+
+	<organization>
+		<name>Zalando SE</name>
+		<url>https://tech.zalando.com/</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<id>drohe</id>
+			<name>Daniel Rohe</name>
+			<organization>Zalando SE</organization>
+			<email>daniel.rohe@zalando.de</email>
+		</developer>
+		<developer>
+			<id>mschumacher</id>
+			<name>Marc Schumacher</name>
+			<organization>Zalando SE</organization>
+			<email>marc.schumacher@zalando.de</email>
+		</developer>
+		<developer>
+			<id>mgorzala</id>
+			<name>Marc Gorzala</name>
+			<organization>Zalando SE</organization>
+			<email>marc.gorzala@zalando.de</email>
+		</developer>
+	</developers>
+
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>http://www.opensource.org/licenses/mit-license.php</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
 </project>
