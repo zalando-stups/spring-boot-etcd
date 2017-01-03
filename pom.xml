@@ -21,6 +21,7 @@
 		<module>zalando-boot-etcd</module>
 		<module>zalando-boot-etcd-autoconfigure</module>
 		<module>zalando-boot-etcd-starter</module>
+		<module>zalando-boot-etcd-sample</module>
 	</modules>
 
 	<properties>
