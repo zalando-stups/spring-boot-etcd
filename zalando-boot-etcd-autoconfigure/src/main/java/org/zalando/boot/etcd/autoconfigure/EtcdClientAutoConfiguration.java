@@ -51,18 +51,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * locations or a service name for DNS discovery.
  */
 @Configuration
-@EnableConfigurationProperties(EtcdClientProperties.class)
 @ConditionalOnMissingBean(EtcdClient.class)
 @ConditionalOnClass(ObjectMapper.class)
 @ConditionalOnProperty(prefix = "zalando.etcd", name = "enabled", matchIfMissing = true)
 public class EtcdClientAutoConfiguration {
 
 	@Configuration
+	@EnableConfigurationProperties(EtcdClientProperties.class)
 	@ConditionalOnProperty(prefix = "zalando.etcd", name = "location")
 	protected static class StaticDiscoveryConfiguration {
 
 		@Autowired
-		private EtcdClientProperties properties = new EtcdClientProperties();
+		private EtcdClientProperties properties;
 
 		@Bean
 		public EtcdClient etcdService() {
@@ -82,11 +82,12 @@ public class EtcdClientAutoConfiguration {
 	}
 
 	@Configuration
+	@EnableConfigurationProperties(EtcdClientProperties.class)
 	@ConditionalOnProperty(prefix = "zalando.etcd", name = "serviceName")
 	protected static class DnsDiscoveryConfiguration {
 
 		@Autowired
-		private EtcdClientProperties properties = new EtcdClientProperties();
+		private EtcdClientProperties properties;
 
 		private List<String> discoverNodes(String serviceName) throws NamingException {
 			List<String> locations = new ArrayList<>();

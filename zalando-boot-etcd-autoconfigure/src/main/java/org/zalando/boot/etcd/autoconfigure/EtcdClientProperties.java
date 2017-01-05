@@ -30,8 +30,8 @@ import lombok.Data;
 /**
  * Configuration properties for the etcd client.
  */
-@ConfigurationProperties(prefix = "zalando.etcd")
 @Data
+@ConfigurationProperties(prefix = "zalando.etcd")
 public class EtcdClientProperties {
 	
 	/**

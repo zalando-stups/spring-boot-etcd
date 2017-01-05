@@ -28,12 +28,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.zalando.boot.etcd.EtcdClient;
-import org.zalando.boot.etcd.SampleApplication;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = SampleApplication.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest()
 public class EtcdClientAutoConfigurationTest {
 
 	@Autowired
