@@ -12,7 +12,7 @@
 
 	<groupId>org.zalando</groupId>
 	<artifactId>zalando-boot-etcd-project</artifactId>
-	<version>2.2-SNAPSHOT</version>
+	<version>2.2</version>
 	<packaging>pom</packaging>
 
 	<name>Zalando Boot Etcd :: Project</name>
@@ -128,7 +128,7 @@
 		<connection>scm:git:https://github.com/zalando/spring-boot-etcd.git</connection>
 		<developerConnection>scm:git:git@github.com:zalando/spring-boot-etcd.git</developerConnection>
 		<url>https://github.com/zalando/spring-boot-etcd</url>
-		<tag>HEAD</tag>
+		<tag>zalando-boot-etcd-project-2.2</tag>
 	</scm>
 
 	<distributionManagement>
