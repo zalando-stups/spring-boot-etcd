@@ -52,7 +52,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.extern.apachecommons.CommonsLog;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * A service that encapsulates the communication with an etcd cluster.
@@ -60,7 +60,7 @@ import lombok.extern.apachecommons.CommonsLog;
  * @see <a href="https://coreos.com/etcd/docs/2.1.0/api.html">https://coreos.com
  *      /etcd/docs/2.1.0/api.html</a>
  */
-@CommonsLog
+@Slf4j
 public class EtcdClient implements InitializingBean, DisposableBean {
 
 	/**

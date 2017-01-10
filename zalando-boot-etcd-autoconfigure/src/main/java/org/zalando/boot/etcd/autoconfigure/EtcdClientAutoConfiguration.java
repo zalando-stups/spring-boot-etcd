@@ -47,25 +47,25 @@ import org.zalando.boot.etcd.EtcdClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * The auto configuration of the etcd client usign either an initial list of
+ * The auto configuration of the etcd client using either an initial list of
  * locations or a service name for DNS discovery.
  */
 @Configuration
-@ConditionalOnMissingBean(EtcdClient.class)
-@ConditionalOnClass(ObjectMapper.class)
 @ConditionalOnProperty(prefix = "zalando.etcd", name = "enabled", matchIfMissing = true)
+@ConditionalOnClass(ObjectMapper.class)
+@ConditionalOnMissingBean(EtcdClient.class)
 public class EtcdClientAutoConfiguration {
 
 	@Configuration
-	@EnableConfigurationProperties(EtcdClientProperties.class)
 	@ConditionalOnProperty(prefix = "zalando.etcd", name = "location")
+	@EnableConfigurationProperties(EtcdClientProperties.class)
 	protected static class StaticDiscoveryConfiguration {
 
 		@Autowired
 		private EtcdClientProperties properties;
 
 		@Bean
-		public EtcdClient etcdService() {
+		public EtcdClient etcdClient() {
 			EtcdClient client = new EtcdClient(properties.getLocation());
 
 			client.setRetryCount(properties.getRetryCount());
@@ -82,8 +82,8 @@ public class EtcdClientAutoConfiguration {
 	}
 
 	@Configuration
-	@EnableConfigurationProperties(EtcdClientProperties.class)
 	@ConditionalOnProperty(prefix = "zalando.etcd", name = "serviceName")
+	@EnableConfigurationProperties(EtcdClientProperties.class)
 	protected static class DnsDiscoveryConfiguration {
 
 		@Autowired
@@ -117,7 +117,7 @@ public class EtcdClientAutoConfiguration {
 		}
 
 		@Bean
-		public EtcdClient etcdService() throws NamingException {
+		public EtcdClient etcdClient() throws NamingException {
 			List<String> locations = discoverNodes("_etcd-server._tcp." + properties.getServiceName());
 
 			EtcdClient client = new EtcdClient(locations.get(0));
