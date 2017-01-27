@@ -1,4 +1,4 @@
-# zalando-boot-etcd
+# spring-boot-etcd
 
 ## Purpose
 
