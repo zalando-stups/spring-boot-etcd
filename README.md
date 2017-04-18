@@ -1,6 +1,6 @@
 # spring-boot-etcd
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.zalando/zalando-boot-etcd-starter/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/org.zalando/zalando-boot-etcd-starter)
+[![Maven Central](https://img.shields.io/maven-central/v/org.zalando/zalando-boot-etcd-starter.svg)]()
 
 ## Purpose
 
