@@ -1,5 +1,7 @@
 # spring-boot-etcd
 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.zalando/zalando-boot-etcd-starter/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/org.zalando/zalando-boot-etcd-starter)
+
 ## Purpose
 
 Spring-boot-etcd is a [Spring Boot](http://projects.spring.io/spring-boot/) library that provides an [etcd](https://github.com/coreos/etcd) client to access and manage key-value pairs stored in an etcd cluster. It's useful out-of-the-box.
