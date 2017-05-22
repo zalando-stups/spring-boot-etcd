@@ -11,4 +11,4 @@ phases:
       - mvn package
 artifacts:
   files:
-    - target/zalando-boot-etcd-1.0-SNAPSHOT.jar
+    - zalando-boot-etcd/target/zalando-boot-etcd-2.4-SNAPSHOT.jar
